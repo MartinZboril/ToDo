@@ -5,8 +5,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+       Title="MainWindow" MinHeight="625" Height="625" MinWidth="1025" Width="1025">
+    <Grid Background="#FFE8E8E8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.45*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.32*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right">Vyhledat:</Label>
+                <TextBox Grid.Column="1" FontSize="20" Background="White" Margin="5,7,5,7"></TextBox>
+                <Button FontSize="16" Grid.Column="2" Content="Vyhledat"  Margin="5,7,5,7"/>
+            </Grid>
+
+            <ListView Background="#FFE8E8E8" x:Name="ToDolist" SelectionChanged="ToDoListItems_SelectionChanged" Grid.Column="0" Grid.Row="1" Margin="0,0,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,7,0,7">
+                            <TextBlock Text="{Binding ID}" FontSize="20"/>
+                            <TextBlock Text=" " />
+                            <TextBlock Text="{Binding Name}" FontSize="20" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Background="White" Grid.Column="1" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="0.3*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock FontSize="24" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="100" FontWeight="Bold">ToDo list</TextBlock>
+
+            <StackPanel Grid.Column="0" Grid.Row="1" Margin="8,8,8,0">
+                <TextBlock Grid.Column="0" FontSize="14" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="55">Název:</TextBlock>
+                <TextBox x:Name="Name" Height="25" FontSize="16"/>
+                <TextBlock x:Name="IsComplatedLabel" Grid.Column="0" FontSize="14" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Visibility="Hidden" Width="111">Vyber dokoncen:</TextBlock>
+                <ComboBox x:Name="IsCompleted" SelectionChanged="IsCompleted_SelectionChanged" Visibility="Hidden" Height="25" FontSize="16">
+                    <ComboBoxItem Content="Dokončen" />
+                    <ComboBoxItem Content="Nedokočen" />
+                </ComboBox>
+            </StackPanel>
+
+
+            <Button x:Name="AddButton" Click="AddButton_ClickAsync" Grid.Row="2" Grid.ColumnSpan="2" Content="Přidat" FontSize="16" Margin="0,10,0,10" VerticalAlignment="Top" HorizontalAlignment="Center" Width="110" Height="40"/>
+
+            <Grid Grid.Row="2" Margin="15,10,15,10" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="UpdateButton" Click="UpdateButton_ClickAsync" Visibility="Hidden" FontSize="16" Grid.Column="0" Content="Změnit"  />
+                <Button x:Name="DeleteButton" Click="DeleteButton_ClickAsync" Visibility="Hidden" FontSize="16" Grid.Column="2" Content="Smazat" />
+            </Grid>
+
+            <TextBlock x:Name="Message" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Bottom" Margin="0,0,0,10" Width="330" HorizontalAlignment="Center" Height="35" FontSize="16" TextAlignment="Center"></TextBlock>
+        </Grid>
     </Grid>
 </Window>
